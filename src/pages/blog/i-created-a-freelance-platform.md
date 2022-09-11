@@ -1,7 +1,7 @@
 ---
 title: I created A Freelance Platform
 description: My story about how I build a freelance platform.
-date: 11 Sep 2022
+pubDate: 11 Sep 2022
 layout: ../../layouts/BlogPost.astro
 ---
 
