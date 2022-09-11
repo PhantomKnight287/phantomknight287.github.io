@@ -1,0 +1,27 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../config";
+---
+
+<header>
+  <h2 class="text-2xl font-bold">
+    {SITE_TITLE}
+  </h2>
+  <nav>
+    <HeaderLink href="/">Home</HeaderLink>
+    <HeaderLink href="https://gurpalsingh.me" target={"_blank"}
+      >About</HeaderLink
+    >
+    <HeaderLink href="https://github.com/phantomknight287" target="_blank"
+      >GitHub</HeaderLink
+    >
+  </nav>
+</header>
+<style>
+  header {
+    margin: 0em 0 2em;
+  }
+  h2 {
+    margin: 0.5em 0;
+  }
+</style>
