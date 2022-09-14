@@ -38,7 +38,12 @@ const {
     <main>
       <article>
         {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-        <h1 class="title" style="margin-bottom: 1rem;">{title}</h1>
+        <h1
+          class="title"
+          style="margin-bottom: 1rem; line-height:40px; text-align: center;"
+        >
+          {title}
+        </h1>
         {pubDate && <time>{pubDate}</time>}
         {
           updatedDate && (
