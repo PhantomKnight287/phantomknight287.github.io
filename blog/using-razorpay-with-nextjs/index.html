@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en" class="astro-YWDNKE2X">
+  <head>
+    <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="generator" content="Astro v1.2.3">
+
+<!-- Primary Meta Tags -->
+<title>How to use Razorpay in Next.js?</title>
+<meta name="title" content="How to use Razorpay in Next.js?">
+<meta name="description" content="How to properly use Razorpay in Next.js">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://phantomknight287.github.io/blog/using-razorpay-with-nextjs/">
+<meta property="og:title" content="How to use Razorpay in Next.js?">
+<meta property="og:description" content="How to properly use Razorpay in Next.js">
+<meta property="og:image" content="https://phantomknight287.github.io/placeholder-social.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://phantomknight287.github.io/blog/using-razorpay-with-nextjs/">
+<meta property="twitter:title" content="How to use Razorpay in Next.js?">
+<meta property="twitter:description" content="How to properly use Razorpay in Next.js">
+<meta property="twitter:image" content="https://phantomknight287.github.io/placeholder-social.jpg">
+
+    
+  <link rel="stylesheet" href="/assets/8f2b5541.c1d7fc28.css" /></head>
+
+  <body class="astro-YWDNKE2X">
+    <header class="astro-B3WRG7E5">
+  <h2 class="text-2xl font-bold astro-B3WRG7E5">
+    My Blog Site
+  </h2>
+  <nav class="astro-B3WRG7E5">
+    <a href="/" class="astro-B3WRG7E5 astro-VBS7ABE4">
+	Home
+</a>
+
+    <a href="https://gurpalsingh.me" class="astro-B3WRG7E5 astro-VBS7ABE4" target="_blank">
+	About
+</a>
+
+    <a href="https://github.com/phantomknight287" class="astro-B3WRG7E5 astro-VBS7ABE4" target="_blank">
+	GitHub
+</a>
+
+  </nav>
+</header>
+
+    <main class="astro-YWDNKE2X">
+      <article class="astro-YWDNKE2X">
+        
+        <h1 class="title astro-YWDNKE2X" style="margin-bottom: 1rem; line-height:40px; text-align: center;">
+          How to use Razorpay in Next.js?
+        </h1>
+        <time class="astro-YWDNKE2X">14 Sep 2022</time>
+        
+        <hr class="astro-YWDNKE2X">
+        <p>While working on the freelance platform, I started to implement Razorpay’s sdk to accept payments. I searched on google to find some official sdk for React but couldn’t find any. I read some blog posts where they showed the older methods using <code>document.createElement</code>, I implemented it but it was kinda slow because it takes some time for the sdk to load. Then I came up with my own solution, I am using <a href="https://mantine.dev"><code>Mantine</code></a> so when user pressed the order button I open a modal showing the amount of the order and a checkbox saying <code>I accept to Payment Terms</code>.After the checkbox is checked, the disabled button(which no longer is disabled) can now be used to initiate a transaction. The Modal has a Nextjs’s Script tag with <code>strategy="lazyOnLoad"</code>, it loads the Razorpay’s script and the script binds itself to the <code>window</code> object. The time taken by the user to read the details and mark the checkbox is enough for the script to load. As soon as the modal is opened, I create a websocket connection with the backend, when the user click on the order button, the frontend emits an event asking the backend to generate <code>order_id</code> which is then supplied to the Razorpay’s sdk to complete the transaction.</p>
+<p>The Script is Loaded Like this:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> Script </span><span style="color: #FF7B72">from</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"next/script"</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #8B949E">// snip</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">&#x3C;</span><span style="color: #C9D1D9">Script</span></span>
+<span class="line"><span style="color: #C9D1D9">  strategy</span><span style="color: #FF7B72">=</span><span style="color: #A5D6FF">"lazyOnload"</span></span>
+<span class="line"><span style="color: #C9D1D9">  src</span><span style="color: #FF7B72">=</span><span style="color: #A5D6FF">"https://checkout.razorpay.com/v1/checkout.js"</span></span>
+<span class="line"><span style="color: #FF7B72">/></span><span style="color: #C9D1D9">;</span></span></code></pre>
+<p>You can then check if this script is loaded by doing <code>window.Razorpay</code> if it is undefined then this script isn’t yet loaded, you can either tell the user to wait for the script to load or use <code>document.createElement</code> to create a script tag and load the script.</p>
+      </article>
+    </main>
+    <footer class="astro-FHHJT7EP">
+	&copy; 2022 Gurpal Singh. All rights reserved.
+</footer>
+
+  </body></html>
